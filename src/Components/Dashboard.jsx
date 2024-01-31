@@ -8,8 +8,11 @@ import Navbar from "./Navbar";
 
 function Dashboard() {
 
+    
+
 
         const [data, setData] = useState([]);
+        
 
             axios.get("https://apitest.reachstar.io/blog/list").then(function (response) {
                 setData(response.data);
@@ -26,8 +29,8 @@ function Dashboard() {
     return ( <React.Fragment>
         <div className="w-100">
 
-            <div className="w-100 landing">
             <Navbar />
+            <div className="w-100 landing">
 
             <div className="container-fluid mt-5">
                 <div className="row pt-4">
@@ -127,7 +130,7 @@ function Dashboard() {
 
                             <div className="w-75">
                             {
-                                data.map(item => <div className="p-3 mb-3 mt-5 animatedDiv" style={{border: '1px solid #333333'}}>
+                                data.map((item, index) => <div key={index} className="p-3 mb-3 mt-5 animatedDiv" style={{border: '1px solid #333333'}}>
                                 <a className="userId">{item.id}</a>
                                 <Link style={{textDecoration: 'none'}} to={`/Details/${item.id}`} >
                                     <h3 className="text-center blogTitle"> {item.title}</h3>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { gsap } from "gsap";
 import Sun from "../Assets/Pics/sun.png";
-import Dashboard from "../Components/Dashboard";
+import Rocket from "../Assets/Pics/rocket.svg";
 
 function Authorize() {
 
@@ -12,6 +12,7 @@ function Authorize() {
         const animateDiv2Ref = useRef(null);
         const animateDiv3Ref = useRef(null);
         const animateDiv4Ref = useRef(null);
+        const rocketRef = useRef(null);
         const navigate = useNavigate();
       
         useEffect(() => {
@@ -57,6 +58,8 @@ function Authorize() {
     }
           }, []);
 
+
+
     // Registration and Authorization
 
           let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -90,7 +93,24 @@ function Authorize() {
             window.alert("please enter correct password");
         }else {
             window.alert("you are Registered");
+
+            const rocket = rocketRef.current;
+            const flyRocket = gsap.timeline();
+    
+            flyRocket.to(rocket, {
+                visibility : 'visible',
+                scale : 1.5,
+                y : -1000,
+                duration : 8,
+                ease: 'power4.inOut',
+                delay : 0.5,
+            });
         }
+
+
+
+
+
         
     }
 
@@ -121,7 +141,7 @@ function Authorize() {
             if (error instanceof AxiosError){
                 // console.log(error?.response?.status);
                 if (error?.response?.status === 422) {
-                    window.alert("მონაცემები არასწორია");
+                    window.alert("please enter correct email address or password");
                 }
             }
           });
@@ -139,7 +159,7 @@ function Authorize() {
         <nav className="navbar navbar-expand-lg">
         <div className="container">
             <a className="navbar-brand brand-logo" href="#">Blog API</a>
-            <div className="w-100 d-flex align-items-center justify-content-between" style={{overflow: "hidden"}}>
+            <div className="w-100 d-none d-md-flex align-items-center justify-content-between" style={{overflow: "hidden"}}>
             <img src={Sun} ref={animateDivRef} alt="sun" />
             <h1 className="animateHello" ref={animateDiv2Ref}>Hello</h1>
             </div>
@@ -151,13 +171,13 @@ function Authorize() {
         
         </header>
 
-        <div className="container p-5">
+        <div className="container mainContainer2">
 
         <div className="row">
 
         {/* Registration */}
 
-        <div className="col-5">
+        <div className="col-md-5 col-12 p-0">
             <div className="w-100">
 
             <h1 className="h1-signup mt-5">Sign Up For Free</h1>
@@ -170,24 +190,24 @@ function Authorize() {
             <input type="text" id="nameIn" />
             <label className="mt-2">Password</label>
             <input type="password" id="passwordIn" />
-            <button className="mt-4 signup-butt" onClick={getRegistration} type="button">Registration</button>
+            <button className="mt-4 signup-butt" onClick={getRegistration} type="button">Registration <img className="rocket" ref={rocketRef} src={Rocket} alt="rocket" /></button>
             </form>
 
             </div>
         </div>
 
-        <div className="col-2">
+        <div className="col-2 d-none d-md-block">
             <div className="w-100 h-100 mt-3 d-flex align-items-center justify-content-between">
 
             <h1 className="h1-or" id="or">OR</h1>
             </div>
-            <div className="w-100 d-flex justify-content-center">
+            <div className="w-100 d-none d-md-flex justify-content-center">
             <div className="lineUnfold" ref={animateDiv4Ref}></div>
             </div>
         </div>
 
-        <div className="col-5">
-            <div className="w-100 ps-5">
+        <div className="col-md-5 col-12 p-0">
+            <div className="w-100 ps-md-5 ps-0" style={{overflow: "hidden"}}>
 
             <h1 className="h1-signup mt-5">Sign In</h1>
 
@@ -206,7 +226,7 @@ function Authorize() {
 
         </div>
 
-        <div className="w-100 d-flex justify-content-center align-items-end position-absolute bottom-0 mb-2">
+        <div className="w-100 d-none d-md-flex justify-content-center align-items-end position-absolute bottom-0 mb-2">
             <div className="lineUp" ref={animateDiv3Ref}></div>
         </div>
 

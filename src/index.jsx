@@ -6,7 +6,6 @@ import Authorize from "./Components/Authorize";
 import Dashboard from "./Components/Dashboard";
 import AddBlog from "./Components/AddBlog";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./Components/Navbar";
 import Details from "./Components/Details";
 
 
